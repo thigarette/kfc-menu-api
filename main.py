@@ -1,3 +1,5 @@
+from scrape import getCategories, getItems
+
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -17,6 +19,22 @@ def get_db():
         yield db
     finally:
         db.close()
+
+streetwise_url = 'https://kfc.ke/item?ItemSearch%5Bcategory%5D=hawugh3xujtc0407&ItemSearch%5Bday%5D=7'
+snacks_url = 'https://kfc.ke/item?ItemSearch%5Bcategory%5D=0anomwm9jcnozryg&ItemSearch%5Bday%5D=7'
+sharing_url = 'https://kfc.ke/item?ItemSearch%5Bcategory%5D=njl5ulycgg8ft5rv&ItemSearch%5Bday%5D=7'
+chicken_deals_url = 'https://kfc.ke/item?ItemSearch%5Bcategory%5D=c5x4llcdlwtk0nok&ItemSearch%5Bday%5D=7'
+side_items_url = 'https://kfc.ke/item?ItemSearch%5Bcategory%5D=hrg3adkvuhe68spw&ItemSearch%5Bday%5D=7'
+drinks_url = 'https://kfc.ke/item?ItemSearch%5Bcategory%5D=0ffdg0xcq9ebcicn&ItemSearch%5Bday%5D=7'
+
+@app.get("/scrape")
+def scrape_kfc_website():
+    
+    message = "Scrape was successful and data was inserted into the db"
+    response = {
+        "message": message
+    }
+    return getItems(drinks_url)
 
 @app.get("/categories", response_model=List[schemas.Category])
 def get_categories(db: Session = Depends(get_db), skip: int = 0, limit: int = 10):
