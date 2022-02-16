@@ -28,4 +28,4 @@ def getCategories(url):
     category_heading = soup.find('h2', class_='heading wow fadeInUp')
     return category_heading.string
 
-getItems('https://kfc.ke/item?ItemSearch%5Bcategory%5D=hawugh3xujtc0407&ItemSearch%5Bday%5D=7')
+# getItems('https://kfc.ke/item?ItemSearch%5Bcategory%5D=hawugh3xujtc0407&ItemSearch%5Bday%5D=7')
